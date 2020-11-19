@@ -1549,12 +1549,12 @@ void Tracking::DetectCuboid(KeyFrame *pKF)
 	std::vector<Vector4d> all_obj2d_bbox;
 	std::vector<double> all_box_confidence;
 	vector<int> truth_tracklet_ids;
-
+	pop_pose_to_ground = InitToGround.clone(); // for kitti, I used InitToGround to pop offline.
+	
 	if (whether_read_offline_cuboidtxt) // saved object txt usually is usually poped in local ground frame, not the global ground frame.
 	{
 		if (all_offline_object_cubes.size() == 0)
-			return;
-		pop_pose_to_ground = InitToGround.clone(); // for kitti, I used InitToGround to pop offline.
+			return;		
 
 		Eigen::MatrixXd pred_frame_objects;
 		Eigen::MatrixXd pred_truth_matches;
